@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: devops-ror-app
+  labels:
+    app: nginx
+spec:
+  type: LoadBalancer     # Exposes externally with a public IP
+  selector:
+    app: nginx
+  ports:
+    - port: 80           # Port to expose publicly
+      targetPort: 80     # Container port nginx is listening on

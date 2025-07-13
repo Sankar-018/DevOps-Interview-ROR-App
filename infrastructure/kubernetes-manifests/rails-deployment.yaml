@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rails-app
+  namespace: devops-ror-app
+  labels:
+    app: rails-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rails-app
+  template:
+    metadata:
+      labels:
+        app: rails-app
+    spec:
+      serviceAccountName: rails-app-sa
+      containers:
+        - name: rails-app
+          image: "626635438086.dkr.ecr.ap-south-1.amazonaws.com/rails-app:latest"
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          env:
+            - name: RDS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: RDS_DB_NAME
+            - name: RDS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: RDS_USERNAME
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: RDS_PASSWORD
+            - name: RDS_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: RDS_HOSTNAME
+            - name: RDS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: RDS_PORT
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: S3_BUCKET_NAME
+            - name: S3_REGION_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: S3_REGION_NAME
+            - name: LB_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: LB_ENDPOINT
+            - name: RAILS_ALLOWED_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rails-secret
+                  key: LB_ENDPOINT
