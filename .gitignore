@@ -1,0 +1,13 @@
+# Terraform state
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+# Kubernetes secrets
+infrastructure/kubernetes-manifests/rails-secret.yaml
+
+# System and editor files
+.DS_Store
+.vscode/
+*.swp
+
