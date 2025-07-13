@@ -1,18 +1,13 @@
-# Terraform state files
-terraform.tfstate
-terraform.tfstate.backup
-
-# Local Terraform directories
+# Terraform
+*.tfstate
+*.tfstate.backup
 .terraform/
-
-# Terraform variable files (if you created .tfvars)
 *.tfvars
 
-echo "terraform.tfstate" >> .gitignore
-echo "terraform.tfstate.backup" >> .gitignore
+# Kubernetes secrets
+rails-secret.yaml
 
-# Ignore editor-specific & system files
-.vscode/
-*.swp
+# System files
 .DS_Store
-Thumbs.db
+*.swp
+.vscode/
